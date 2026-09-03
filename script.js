@@ -1,6 +1,6 @@
 // Replace this with your real WhatsApp number, digits only, including country code.
 // Example: const WHATSAPP_NUMBER = "919876543210";
-const WHATSAPP_NUMBER = "919000000000";
+const WHATSAPP_NUMBER = "917002581794";
 
 const menuBtn = document.querySelector(".menu-btn");
 const nav = document.querySelector("#navLinks");
