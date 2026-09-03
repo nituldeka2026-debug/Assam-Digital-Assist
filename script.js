@@ -1,35 +1,30 @@
+// Replace this with your real WhatsApp number, digits only, including country code.
+// Example: const WHATSAPP_NUMBER = "919876543210";
 const WHATSAPP_NUMBER = "917002581794";
 
-const menu = document.querySelector(".menu");
-const nav = document.querySelector("#nav");
-menu?.addEventListener("click", () => nav.classList.toggle("open"));
+const menuBtn = document.querySelector(".menu-btn");
+const nav = document.querySelector("#navLinks");
+menuBtn?.addEventListener("click", () => nav.classList.toggle("open"));
 
-function selectService(service){
-  const select = document.querySelector("#service");
-  if(select){ select.value = service; document.querySelector("#order")?.scrollIntoView({behavior:"smooth"}); }
-}
-document.querySelectorAll("[data-service]").forEach(el => {
-  el.addEventListener("click", () => selectService(el.dataset.service));
+document.querySelectorAll("[data-service]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const service = btn.dataset.service;
+    document.querySelector("#service").value = service;
+  });
 });
 
-const waUrl = `https://wa.me/${WHATSAPP_NUMBER}`;
-document.querySelector("#floatWA").href = waUrl;
-document.querySelector("#footerWA").href = waUrl;
+const waFloat = document.querySelector("#waFloat");
+waFloat.href = `https://wa.me/${WHATSAPP_NUMBER}`;
 
-document.querySelector("#orderForm").addEventListener("submit", e => {
+document.querySelector("#orderForm").addEventListener("submit", (e) => {
   e.preventDefault();
   const name = document.querySelector("#name").value.trim();
   const phone = document.querySelector("#phone").value.trim();
   const service = document.querySelector("#service").value;
   const details = document.querySelector("#details").value.trim();
 
-  const digits = phone.replace(/\D/g,"");
-  if(digits.length !== 10){
-    alert("Please enter a valid 10-digit mobile number.");
-    return;
-  }
-
-  const message = `Hello Axom Digital Assist,
+  const message =
+`Hello Axom Digital Assist 👋
 
 I want to place an order.
 
@@ -38,9 +33,7 @@ Mobile: ${phone}
 Service: ${service}
 Requirements: ${details}
 
-Please confirm the price and delivery time.
+Please confirm the price and delivery time.`;
 
-Thank you.`;
-
-  window.open(`${waUrl}?text=${encodeURIComponent(message)}`, "_blank");
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
 });
