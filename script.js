@@ -24,7 +24,7 @@ document.querySelector("#orderForm").addEventListener("submit", (e) => {
   const details = document.querySelector("#details").value.trim();
 
   const message =
-`Hello Axom Digital Assist 👋
+`Hello Axom Digital Assist,
 
 I want to place an order.
 
@@ -33,7 +33,10 @@ Mobile: ${phone}
 Service: ${service}
 Requirements: ${details}
 
-Please confirm the price and delivery time.`;
+Please confirm the price and delivery time.
+
+Thank you.`;
+
 
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
 });
