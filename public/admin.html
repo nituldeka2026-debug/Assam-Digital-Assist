@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin — NITUL Services</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header class="topbar"><div class="brand">NITUL<span>Admin</span></div><nav><a href="/">Customer Site</a></nav></header>
+<main class="section">
+<div id="login" class="panel narrow">
+<p class="eyebrow">SECURE ADMIN</p><h2>Admin Login</h2>
+<form id="loginForm">
+<label>Username<input id="username" required></label><br>
+<label>Password<input id="password" type="password" required></label><br>
+<button class="btn dark">Login</button>
+</form><div id="loginError"></div>
+</div>
+<div id="dashboard" class="hidden">
+<div class="section-head"><div><p class="eyebrow">CONTROL CENTER</p><h2>Dashboard</h2></div><button class="btn dark" onclick="logout()">Logout</button></div>
+<div id="stats" class="grid"></div>
+<div class="panel" style="margin-top:25px;max-width:none">
+<div class="inline-form"><input id="search" placeholder="Search Order ID, mobile, name or UTR"><button class="btn dark" onclick="loadOrders()">Search</button></div>
+<div id="orders" style="overflow:auto;margin-top:25px"></div>
+</div>
+</div>
+</main>
+<script>
+let token=localStorage.getItem("adminToken");
+const $=id=>document.getElementById(id);
+$("loginForm").addEventListener("submit",async e=>{
+ e.preventDefault(); let r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:$("username").value,password:$("password").value})});
+ let d=await r.json(); if(!r.ok)return $("loginError").innerHTML='<div class="status">Invalid login</div>';
+ localStorage.setItem("adminToken",d.token); token=d.token; init();
+});
+async function api(url,opt={}){opt.headers={...(opt.headers||{}),Authorization:"Bearer "+token};return fetch(url,opt)}
+async function init(){if(!token)return;$("login").classList.add("hidden");$("dashboard").classList.remove("hidden");loadStats();loadOrders()}
+async function loadStats(){let r=await api("/api/admin/stats");if(r.status===401)return logout();let d=await r.json();$("stats").innerHTML=[
+["Total",d.total],["Payment Pending",d.payment_pending],["Processing",d.processing],["Completed",d.completed]
+].map(x=>`<div class="service"><p class="eyebrow">${x[0]}</p><h2>${x[1]}</h2></div>`).join("")}
+async function loadOrders(){let q=encodeURIComponent($("search").value);let r=await api("/api/admin/orders?q="+q);let data=await r.json();
+$("orders").innerHTML=`<table style="width:100%;border-collapse:collapse;min-width:950px"><thead><tr><th>Order</th><th>Customer</th><th>Service</th><th>Amount</th><th>UTR</th><th>Payment</th><th>Status</th><th>Action</th></tr></thead><tbody>${data.map(o=>`<tr>
+<td>${h(o.order_id)}<br><small>${new Date(o.created_at).toLocaleString("en-IN")}</small></td><td>${h(o.customer_name)}<br>${h(o.mobile)}</td><td>${h(o.service_name)}</td><td>₹${o.amount}</td><td>${h(o.utr||"-")}</td>
+<td><select id="p-${o.order_id}"><option ${o.payment_status==="pending"?"selected":""}>pending</option><option ${o.payment_status==="verification_pending"?"selected":""}>verification_pending</option><option ${o.payment_status==="paid"?"selected":""}>paid</option><option ${o.payment_status==="rejected"?"selected":""}>rejected</option></select></td>
+<td><select id="s-${o.order_id}"><option ${o.order_status==="new"?"selected":""}>new</option><option ${o.order_status==="processing"?"selected":""}>processing</option><option ${o.order_status==="completed"?"selected":""}>completed</option><option ${o.order_status==="cancelled"?"selected":""}>cancelled</option></select></td>
+<td><button class="btn primary" onclick="updateOrder('${o.order_id}')">Save</button></td></tr>`).join("")}</tbody></table>`}
+async function updateOrder(id){let paymentStatus=$("p-"+id).value,orderStatus=$("s-"+id).value;await api("/api/admin/orders/"+encodeURIComponent(id),{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({paymentStatus,orderStatus})});loadStats();loadOrders()}
+function logout(){localStorage.removeItem("adminToken");location.reload()}
+function h(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+init();
+</script>
+</body></html>
