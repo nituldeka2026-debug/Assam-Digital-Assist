@@ -1,17 +1,17 @@
-# Axom Digital Assist
+AXOM DIGITAL ASSIST — PRO WEBSITE
 
-A responsive starter website for an online digital-service business.
+Files:
+- index.html
+- style.css
+- script.js
 
-## Files
-- index.html — website
-- style.css — design
-- script.js — WhatsApp order form
+WhatsApp is configured for the current business number.
 
-## Before publishing
-1. Open `script.js`.
-2. Replace `919000000000` with your real WhatsApp number (country code + number, digits only).
-3. Replace any placeholder contact information in `index.html`.
-4. Upload all three files to your GitHub repository.
-5. Enable GitHub Pages from the repository Settings → Pages.
+To publish on GitHub Pages:
+1. Upload index.html, style.css and script.js to the repository root.
+2. Repository → Settings → Pages.
+3. Source: Deploy from a branch.
+4. Branch: main, folder: / (root).
+5. Save.
 
-No backend is required for this first version. Orders are sent to WhatsApp.
+The website is a front-end site. The order form opens WhatsApp; it does not store customer data in a database.
