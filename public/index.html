@@ -1,1 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Axom Digital Assist — Online Services</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:#0b3d91;color:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+header h1{margin:0;font-size:22px}nav button{margin:4px;padding:10px 14px;border:0;border-radius:8px;cursor:pointer}
+main{max-width:1050px;margin:25px auto;padding:0 16px}.hero,.card{background:#fff;border-radius:16px;padding:25px;box-shadow:0 5px 20px #00000010;margin-bottom:18px}
+.hero{background:linear-gradient(135deg,#0b3d91,#1769d1);color:white}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+label{display:block;margin:12px 0 6px;font-weight:bold}input,select,textarea{width:100%;padding:12px;border:1px solid #ccd3df;border-radius:8px;font-size:15px}textarea{min-height:90px}
+.btn{background:#0b3d91;color:white;border:0;border-radius:8px;padding:12px 16px;cursor:pointer;font-weight:bold}.gpay{background:#128c7e}.danger{background:#b42318}
+.hidden{display:none}.result{margin-top:15px;padding:15px;border-radius:10px;background:#eef6ff}.status{font-weight:bold;padding:5px 9px;border-radius:15px;background:#edf2f7;display:inline-block}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}td select{min-width:160px;padding:7px}
+.small{font-size:13px;color:#64748b}.copy{cursor:pointer;text-decoration:underline}.wa{position:fixed;right:18px;bottom:18px;background:#25d366;color:white;padding:13px 17px;border-radius:30px;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<header><h1>🌐 Axom Digital Assist</h1><nav>
+<button onclick="show('home')">Home</button><button onclick="show('order')">Order Service</button><button onclick="show('track')">Track Order</button><button onclick="show('admin')">Admin</button>
+</nav></header>
+<main>
+<section id="home" class="hero">
+<h2>Online Digital Services — Simple & Secure</h2><p>Order your service online, pay through GPay and track your order using your Order ID.</p>
+<button class="btn" onclick="show('order')">Start New Order</button>
+</section>
+
+<section id="order" class="card hidden">
+<h2>📝 New Service Order</h2>
+<form id="orderForm">
+<label>Name</label><input id="name" required>
+<label>Mobile Number</label><input id="phone" required>
+<label>Service</label><select id="service" required><option value="">Select service</option><option>Online Form Fill-up</option><option>Document Service</option><option>Application Service</option><option>Other Digital Service</option></select>
+<label>Amount (₹)</label><input id="amount" type="number" min="0" required>
+<label>Notes</label><textarea id="notes" placeholder="Any additional details"></textarea>
+<button class="btn" type="submit">Create Order</button>
+</form><div id="orderResult"></div>
+</section>
+
+<section id="payment" class="card hidden">
+<h2>💳 GPay Payment</h2><p>Send the exact order amount to this GPay number:</p>
+<h2>📱 <span id="gpay"></span> <span class="copy" onclick="copyGpay()">Copy</span></h2>
+<p class="small">After payment, enter your UTR/Transaction ID below. Admin will verify it manually.</p>
+<input id="payOrderId" readonly><label>UTR / Transaction ID</label><input id="utr" placeholder="Enter UTR / transaction ID">
+<button class="btn gpay" onclick="submitPayment()">Submit Payment Details</button>
+<div id="payResult"></div>
+</section>
+
+<section id="track" class="card hidden">
+<h2>🔎 Track Your Order</h2><input id="trackId" placeholder="Example: ADA-20260904-ABC123">
+<br><br><button class="btn" onclick="track()">Track Order</button><div id="trackResult"></div>
+</section>
+
+<section id="admin" class="card hidden">
+<h2>👨‍💼 Admin Panel</h2>
+<div id="loginBox"><input id="adminPass" type="password" placeholder="Admin password"><br><br><button class="btn" onclick="adminLogin()">Login</button></div>
+<div id="adminPanel" class="hidden"><button class="btn" onclick="loadOrders()">Refresh Orders</button><div id="adminResult"></div></div>
+</section>
+</main>
+<a class="wa" href="https://wa.me/917002581794" target="_blank">💬 WhatsApp</a>
+<script>
+let GPay="7002581794", adminPassword="";
+function show(id){document.querySelectorAll("main>section").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden")}
+async function init(){let r=await fetch("/api/config");let x=await r.json();GPay=x.gpay;document.getElementById("gpay").textContent=GPay}
+init();
+function copyGpay(){navigator.clipboard?.writeText(GPay);alert("GPay number copied: "+GPay)}
+document.getElementById("orderForm").onsubmit=async e=>{
+ e.preventDefault();let body={name:name.value,phone:phone.value,service:service.value,amount:amount.value,notes:notes.value};
+ let r=await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});let x=await r.json();
+ if(!r.ok)return alert(x.error);payOrderId.value=x.order.orderId;
+ orderResult.innerHTML=`<div class="result"><b>Order Created!</b><br>Order ID: <b>${x.order.orderId}</b><br>Amount: ₹${x.order.amount}<br><br>Proceed to GPay payment below.</div>`;
+ show("payment");
+}
+async function submitPayment(){let id=payOrderId.value, u=utr.value.trim();if(!u)return alert("Enter UTR/Transaction ID");
+ let r=await fetch("/api/orders/"+encodeURIComponent(id)+"/payment",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({utr:u})});let x=await r.json();if(!r.ok)return alert(x.error);
+ payResult.innerHTML=`<div class="result">✅ Payment details submitted.<br>Order ID: <b>${x.order.orderId}</b><br>Status: <b>${x.order.orderStatus}</b></div>`;
+}
+async function track(){let id=trackId.value.trim();if(!id)return;let r=await fetch("/api/orders/"+encodeURIComponent(id));let x=await r.json();if(!r.ok)return trackResult.innerHTML="<div class=result>❌ Order not found.</div>";let o=x.order;
+ trackResult.innerHTML=`<div class=result><b>${o.orderId}</b><br>Service: ${o.service}<br>Amount: ₹${o.amount}<br>Payment: ${o.paymentStatus}<br>Order Status: <span class=status>${o.orderStatus}</span><br>Created: ${new Date(o.createdAt).toLocaleString()}</div>`;
+}
+async function adminLogin(){adminPassword=adminPass.value;let r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:adminPassword})});if(!r.ok)return alert("Invalid password");loginBox.classList.add("hidden");adminPanel.classList.remove("hidden");loadOrders()}
+async function loadOrders(){let r=await fetch("/api/admin/orders",{headers:{"x-admin-password":adminPassword}});let x=await r.json();if(!r.ok)return alert(x.error);
+ let rows=x.orders.map(o=>`<tr><td>${o.orderId}</td><td>${o.name}<br>${o.phone}</td><td>${o.service}<br>₹${o.amount}</td><td>${o.paymentStatus}<br>${o.utr||"-"}</td><td><select onchange="changeStatus('${o.orderId}',this.value)">${["Pending Payment","Order Received","Payment Confirmed","In Progress","Ready for Delivery","Delivered","Cancelled"].map(s=>`<option ${s===o.orderStatus?"selected":""}>${s}</option>`).join("")}</select></td></tr>`).join("");
+ adminResult.innerHTML=`<div style="overflow:auto;margin-top:15px"><table><tr><th>Order</th><th>Customer</th><th>Service</th><th>Payment</th><th>Status</th></tr>${rows}</table></div>`;
+}
+async function changeStatus(id,status){let r=await fetch("/api/admin/orders/"+encodeURIComponent(id),{method:"PATCH",headers:{"Content-Type":"application/json","x-admin-password":adminPassword},body:JSON.stringify({orderStatus:status})});if(!r.ok)return alert("Update failed");loadOrders()}
+</script>
+</body></html>
 
