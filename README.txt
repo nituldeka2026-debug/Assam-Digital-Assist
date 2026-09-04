@@ -6,7 +6,7 @@ This is a simple API-free MVP for taking orders through WhatsApp and payments th
 
 The WhatsApp number is already set to `7002581794`.
 
-The UPI VPA is set to `7002581794@upi` based on the number provided. If your actual UPI ID has a different suffix (for example `@oksbi`, `@ybl`, `@paytm`, etc.), change `UPI_ID` in `script.js` to the exact UPI ID shown in your UPI app.
+The UPI VPA is set to `7002581794@upi` based on the number provided. If your actual UPI Number: 7002581794
 
 Example:
 
@@ -24,3 +24,6 @@ Added services:
 - Graphic Design
 - Book Cover Page Design
 - Book Layout
+
+UPI ID/VPA has been removed. UPI number shown: 7002581794.
+Services include Graphic Design, Book Cover Design, and Book Layout.

@@ -86,8 +86,8 @@
     <div class="upi-icon">💳</div>
     <h3>Pay Securely Using UPI</h3>
     <p class="payment-note">Please confirm the final amount with us before making payment.</p>
-    <div class="upi-id">UPI ID: <strong id="upiDisplay">YOUR_UPI_ID@upi</strong></div>
-    <button class="pay-btn" onclick="payUPI()">💰 Pay Now</button>
+    <div class="upi-id">UPI Number: <strong id="upiDisplay">YOUR_UPI_ID@upi</strong></div>
+    <button class="pay-btn" onclick="sendPaymentWhatsApp()">💰 Pay Now</button>
     <button class="screenshot-btn" onclick="sendPaymentWhatsApp()">📸 Send Payment Screenshot</button>
   </div>
 </section>
@@ -97,15 +97,7 @@
   <p>Simple digital services for everyone.</p>
   <p class="copyright">© 2026 Assam Digital Assist. All Rights Reserved.</p>
 </footer>
-<script src="script.js"></script>
-
-        <div class="service-card">
-          <h3>🎨 Graphic Design</h3>
-          <p>Professional posters, banners, social media designs and other graphics.</p>
-          <button onclick="selectService('Graphic Design')">Order Now</button>
-        </div>
-
-        <div class="service-card">
+<script src="script.js"></script><div class="service-card">
           <h3>📕 Book Cover Page Design</h3>
           <p>Attractive and professional front cover designs for books and publications.</p>
           <button onclick="selectService('Book Cover Page Design')">Order Now</button>
@@ -117,5 +109,23 @@
           <button onclick="selectService('Book Layout')">Order Now</button>
         </div>
 
+
+        <div class="service-card">
+          <h3>🎨 Graphic Design</h3>
+          <p>Professional posters, banners, social media designs and other graphics.</p>
+          <button onclick="selectService('Graphic Design')">Order Now</button>
+        </div>
+
+        <div class="service-card">
+          <h3>📕 Book Cover Design</h3>
+          <p>Attractive and professional cover designs for books and publications.</p>
+          <button onclick="selectService('Book Cover Design')">Order Now</button>
+        </div>
+
+        <div class="service-card">
+          <h3>📖 Book Layout</h3>
+          <p>Clean and professional interior book layout and page formatting.</p>
+          <button onclick="selectService('Book Layout')">Order Now</button>
+        </div>
 </body>
 </html>

@@ -5,10 +5,10 @@
 
 // IMPORTANT: Replace these two values.
 const WHATSAPP_NUMBER = "7002581794";
-const UPI_ID = "7002581794@upi";
+const UPI_NUMBER = "7002581794";
 const BUSINESS_NAME = "Assam Digital Assist";
 
-document.getElementById("upiDisplay").textContent = UPI_ID;
+document.getElementById("upiDisplay").textContent = UPI_NUMBER;
 
 function selectService(service) {
   document.getElementById("serviceName").value = service;
@@ -50,21 +50,6 @@ Thank you.`;
   window.open(whatsappURL, "_blank");
 }
 
-function payUPI() {
-  const amount = prompt("Enter the confirmed payment amount (₹):");
-  if (!amount) return;
-
-  if (UPI_ID === "YOUR_UPI_ID@upi") {
-    return alert("Please add your UPI ID in script.js first.");
-  }
-
-  const upiURL = "upi://pay?pa=" + encodeURIComponent(UPI_ID) +
-    "&pn=" + encodeURIComponent(BUSINESS_NAME) +
-    "&am=" + encodeURIComponent(amount) +
-    "&cu=INR";
-
-  window.location.href = upiURL;
-}
 
 function sendPaymentWhatsApp() {
   if (WHATSAPP_NUMBER === "YOUR_WHATSAPP_NUMBER") {
