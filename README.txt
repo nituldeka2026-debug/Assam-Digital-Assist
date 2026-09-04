@@ -18,3 +18,9 @@ const UPI_ID = "nitul@upi";
 Then upload `index.html`, `style.css`, and `script.js` to your GitHub repository.
 
 No AI/API is required for this first version.
+
+
+Added services:
+- Graphic Design
+- Book Cover Page Design
+- Book Layout
