@@ -1,39 +1,84 @@
-// Replace this with your real WhatsApp number, digits only, including country code.
-// Example: const WHATSAPP_NUMBER = "919876543210";
-const WHATSAPP_NUMBER = "917002581794";
+// ================================
+// ASSAM DIGITAL ASSIST
+// WHATSAPP + UPI SYSTEM
+// ================================
 
-const menuBtn = document.querySelector(".menu-btn");
-const nav = document.querySelector("#navLinks");
-menuBtn?.addEventListener("click", () => nav.classList.toggle("open"));
+// IMPORTANT: Replace these two values.
+const WHATSAPP_NUMBER = "7002581794";
+const UPI_ID = "7002581794@upi";
+const BUSINESS_NAME = "Assam Digital Assist";
 
-document.querySelectorAll("[data-service]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const service = btn.dataset.service;
-    document.querySelector("#service").value = service;
-  });
-});
+document.getElementById("upiDisplay").textContent = UPI_ID;
 
-const waFloat = document.querySelector("#waFloat");
-waFloat.href = `https://wa.me/${WHATSAPP_NUMBER}`;
+function selectService(service) {
+  document.getElementById("serviceName").value = service;
+  document.getElementById("order").scrollIntoView({behavior:"smooth"});
+}
 
-document.querySelector("#orderForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const name = document.querySelector("#name").value.trim();
-  const phone = document.querySelector("#phone").value.trim();
-  const service = document.querySelector("#service").value;
-  const details = document.querySelector("#details").value.trim();
+function sendWhatsAppOrder() {
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const service = document.getElementById("serviceName").value;
+  const details = document.getElementById("orderDetails").value.trim();
+  const quantity = document.getElementById("quantity").value.trim();
 
-  const message =
-`Hello Axom Digital Assist 👋
+  if (!name) return alert("Please enter your name.");
+  if (!phone) return alert("Please enter your WhatsApp number.");
+  if (!service) return alert("Please select a service.");
+  if (!details) return alert("Please enter your order details.");
+  if (WHATSAPP_NUMBER === "YOUR_WHATSAPP_NUMBER") {
+    return alert("Please add your WhatsApp number in script.js first.");
+  }
+
+  const message = `Hello ${BUSINESS_NAME} 👋
 
 I want to place an order.
 
-Name: ${name}
-Mobile: ${phone}
-Service: ${service}
-Requirements: ${details}
+👤 Name: ${name}
+📱 WhatsApp Number: ${phone}
+🛠️ Service: ${service}
+📦 Quantity: ${quantity || "Not specified"}
 
-Please confirm the price and delivery time.`;
+📝 Order Details:
+${details}
 
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
-});
+Please confirm my order and total amount.
+
+Thank you.`;
+
+  const whatsappURL = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  window.open(whatsappURL, "_blank");
+}
+
+function payUPI() {
+  const amount = prompt("Enter the confirmed payment amount (₹):");
+  if (!amount) return;
+
+  if (UPI_ID === "YOUR_UPI_ID@upi") {
+    return alert("Please add your UPI ID in script.js first.");
+  }
+
+  const upiURL = "upi://pay?pa=" + encodeURIComponent(UPI_ID) +
+    "&pn=" + encodeURIComponent(BUSINESS_NAME) +
+    "&am=" + encodeURIComponent(amount) +
+    "&cu=INR";
+
+  window.location.href = upiURL;
+}
+
+function sendPaymentWhatsApp() {
+  if (WHATSAPP_NUMBER === "YOUR_WHATSAPP_NUMBER") {
+    return alert("Please add your WhatsApp number in script.js first.");
+  }
+
+  const message = `Hello ${BUSINESS_NAME} 👋
+
+I have completed the UPI payment.
+
+I am sending my payment screenshot here.
+
+Please verify the payment and confirm my order.`;
+
+  const whatsappURL = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  window.open(whatsappURL, "_blank");
+}
