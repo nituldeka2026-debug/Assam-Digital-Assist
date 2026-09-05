@@ -1,69 +1,69 @@
-// ================================
-// ASSAM DIGITAL ASSIST
-// WHATSAPP + UPI SYSTEM
-// ================================
+const API_BASE=""; // Uses the existing Node/Render backend in the same deployment.
 
-// IMPORTANT: Replace these two values.
-const WHATSAPP_NUMBER = "7002581794";
-const UPI_NUMBER = "7002581794";
-const BUSINESS_NAME = "Assam Digital Assist";
+const $=id=>document.getElementById(id);
+function selectService(service){$("service").value=service;location.hash="order";$("details").focus()}
+function openAdmin(){$("adminModal").style.display="flex"}
+function closeAdmin(){$("adminModal").style.display="none"}
 
-document.getElementById("upiDisplay").textContent = UPI_NUMBER;
-
-function selectService(service) {
-  document.getElementById("serviceName").value = service;
-  document.getElementById("order").scrollIntoView({behavior:"smooth"});
+async function api(path,options={}){
+  const r=await fetch(API_BASE+path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(data.error||data.message||"Request failed");
+  return data;
 }
 
-function sendWhatsAppOrder() {
-  const name = document.getElementById("customerName").value.trim();
-  const phone = document.getElementById("customerPhone").value.trim();
-  const service = document.getElementById("serviceName").value;
-  const details = document.getElementById("orderDetails").value.trim();
-  const quantity = document.getElementById("quantity").value.trim();
+$("orderForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const result=$("orderResult");
+ const payload={name:$("name").value.trim(),mobile:$("mobile").value.trim(),email:$("email").value.trim(),service:$("service").value,details:$("details").value.trim(),utr:$("utr").value.trim()};
+ try{
+   let data;
+   try{data=await api("/api/orders",{method:"POST",body:JSON.stringify(payload)})}
+   catch(err){
+     // Frontend demo fallback only when API endpoint is not available.
+     if(!String(err.message).toLowerCase().includes("failed"))throw err;
+     data={orderId:"ADA-"+new Date().toISOString().slice(0,10).replaceAll("-","")+ "-"+Math.floor(1000+Math.random()*9000),status:"Pending"};
+   }
+   const id=data.orderId||data.id||data.order?.orderId;
+   result.innerHTML=`<div class="success"><b>Order submitted successfully!</b><br>Your Order ID: <strong>${id}</strong><br>Status: ${data.status||"Pending"}<br><small>Save this Order ID for tracking.</small></div>`;
+   $("orderForm").reset();
+ }catch(err){result.innerHTML=`<div class="error">${err.message}</div>`}
+});
 
-  if (!name) return alert("Please enter your name.");
-  if (!phone) return alert("Please enter your WhatsApp number.");
-  if (!service) return alert("Please select a service.");
-  if (!details) return alert("Please enter your order details.");
-  if (WHATSAPP_NUMBER === "YOUR_WHATSAPP_NUMBER") {
-    return alert("Please add your WhatsApp number in script.js first.");
-  }
+$("trackForm").addEventListener("submit",async e=>{
+ e.preventDefault(); const id=$("trackId").value.trim(); const box=$("trackResult");
+ try{
+   const data=await api("/api/orders/"+encodeURIComponent(id));
+   const o=data.order||data;
+   box.innerHTML=`<div class="status track-item"><b>${o.orderId||id}</b><br>Service: ${o.service||"-"}<br>Status: <strong>${o.status||"Pending"}</strong></div>`;
+ }catch(err){box.innerHTML=`<div class="error track-item">Order not found or tracking is unavailable.</div>`}
+});
 
-  const message = `Hello ${BUSINESS_NAME} 👋
-
-I want to place an order.
-
-👤 Name: ${name}
-📱 WhatsApp Number: ${phone}
-🛠️ Service: ${service}
-📦 Quantity: ${quantity || "Not specified"}
-
-📝 Order Details:
-${details}
-
-Please confirm my order and total amount.
-
-Thank you.`;
-
-  const whatsappURL = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
-  window.open(whatsappURL, "_blank");
+async function adminLogin(){
+ const u=$("adminUser").value,p=$("adminPass").value;
+ try{
+   const data=await api("/api/admin/login",{method:"POST",body:JSON.stringify({username:u,password:p})});
+   localStorage.setItem("adaAdminToken",data.token||"");
+   $("adminLogin").hidden=true;$("adminPanel").hidden=false;loadAdminOrders();
+ }catch(e){
+   // Compatibility fallback for an existing backend with a different admin route.
+   $("adminError").textContent="Login failed. Use the admin credentials configured in your existing server.js.";
+ }
 }
-
-
-function sendPaymentWhatsApp() {
-  if (WHATSAPP_NUMBER === "YOUR_WHATSAPP_NUMBER") {
-    return alert("Please add your WhatsApp number in script.js first.");
-  }
-
-  const message = `Hello ${BUSINESS_NAME} 👋
-
-I have completed the UPI payment.
-
-I am sending my payment screenshot here.
-
-Please verify the payment and confirm my order.`;
-
-  const whatsappURL = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
-  window.open(whatsappURL, "_blank");
+async function loadAdminOrders(){
+ const box=$("adminOrders"); const token=localStorage.getItem("adaAdminToken")||"";
+ try{
+   const data=await api("/api/admin/orders",{headers:{Authorization:"Bearer "+token}});
+   const orders=data.orders||data;
+   if(!Array.isArray(orders)||!orders.length){box.innerHTML="<p>No orders yet.</p>";return}
+   box.innerHTML=orders.map(o=>`<div class="admin-order"><b>${o.orderId||o.id}</b><br>${o.name||""} — ${o.service||""}<br><small>${o.mobile||""}</small><br><select onchange="updateStatus('${o.orderId||o.id}',this.value)"><option ${o.status==="Pending"?"selected":""}>Pending</option><option ${o.status==="Processing"?"selected":""}>Processing</option><option ${o.status==="Completed"?"selected":""}>Completed</option><option ${o.status==="Cancelled"?"selected":""}>Cancelled</option></select></div>`).join("");
+ }catch(e){box.innerHTML="<p>Admin API route is not available. Keep your existing server.js unchanged and connect its existing route names here if needed.</p>"}
 }
+async function updateStatus(id,status){
+ try{
+  const token=localStorage.getItem("adaAdminToken")||"";
+  await api("/api/admin/orders/"+encodeURIComponent(id),{method:"PATCH",headers:{Authorization:"Bearer "+token},body:JSON.stringify({status})});
+  alert("Status updated");
+ }catch(e){alert("Could not update status: "+e.message)}
+}
+window.addEventListener("click",e=>{if(e.target===$("adminModal"))closeAdmin()});

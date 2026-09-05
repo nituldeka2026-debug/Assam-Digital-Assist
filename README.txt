@@ -1,29 +1,29 @@
-# Assam Digital Assist - WhatsApp + UPI
+# Assam Digital Assist — New Frontend
 
-This is a simple API-free MVP for taking orders through WhatsApp and payments through UPI.
+This ZIP contains ONLY the replacement frontend files:
+- index.html
+- style.css
+- script.js
 
-## Setup
-
-The WhatsApp number is already set to `7002581794`.
-
-The UPI VPA is set to `7002581794@upi` based on the number provided. If your actual UPI Number: 7002581794
-
-Example:
-
-```js
-const WHATSAPP_NUMBER = "919876543210";
-const UPI_ID = "nitul@upi";
-```
-
-Then upload `index.html`, `style.css`, and `script.js` to your GitHub repository.
-
-No AI/API is required for this first version.
-
-
-Added services:
-- Graphic Design
-- Book Cover Page Design
+Services added:
+- Book Cover Design
 - Book Layout
+- Graphic Design
+- Digital Assistance
+- GPay reference: 7002581794
+- UTR/Transaction ID
+- Customer order tracking
+- Admin login/order status UI
+- WhatsApp support
+- Mobile responsive design
 
-UPI ID/VPA has been removed. UPI number shown: 7002581794.
-Services include Graphic Design, Book Cover Design, and Book Layout.
+IMPORTANT:
+Do not replace server.js, package.json, render.yaml, public/, orders.json or .env files from this ZIP.
+The frontend expects the existing backend API routes:
+POST /api/orders
+GET /api/orders/:orderId
+POST /api/admin/login
+GET /api/admin/orders
+PATCH /api/admin/orders/:orderId
+
+If your existing server.js uses different route names, keep server.js unchanged and adjust only script.js API paths.
