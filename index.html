@@ -3,102 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assam Digital Assist</title>
-  <meta name="description" content="Assam Digital Assist - Digital services and online assistance.">
+  <meta name="theme-color" content="#071a33">
+  <meta name="description" content="Assam Digital Assist - Digital services made simple.">
+  <title>Assam Digital Assist | Digital Services Made Easy</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">ADA</div>
-      <div>
-        <h1>Assam Digital Assist</h1>
-        <p>Fast • Simple • Trusted</p>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="#home"><span class="brand-mark">ADA</span><span>ASSAM DIGITAL <b>ASSIST</b></span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    <nav id="navMenu">
+      <a href="#home">Home</a><a href="#services">Services</a><a href="#how">How It Works</a>
+      <a href="#order">Order</a><a href="#track">Track Order</a><a href="#contact">Contact</a>
+      <a class="nav-wa" href="https://wa.me/917002581794" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">⚡ FAST • SIMPLE • RELIABLE</div>
+      <h1>Your Digital Work,<br><span>Made Easy.</span></h1>
+      <p class="hero-text">Professional digital services for websites, online forms, design, documents and more — with easy WhatsApp support.</p>
+      <div class="hero-actions">
+        <a href="#order" class="btn primary">🚀 ORDER NOW</a>
+        <a href="https://wa.me/917002581794?text=Hello%20Assam%20Digital%20Assist%2C%20I%20need%20a%20digital%20service." target="_blank" rel="noopener" class="btn whatsapp">💬 WHATSAPP US</a>
+      </div>
+      <div class="hero-points"><span>✓ Easy Ordering</span><span>✓ WhatsApp Support</span><span>✓ Transparent Process</span></div>
+    </div>
+    <div class="hero-card">
+      <div class="floating-card card-one">🌐 <b>Website</b><small>Professional web solutions</small></div>
+      <div class="floating-card card-two">🎨 <b>Design</b><small>Posters • Logos • Graphics</small></div>
+      <div class="screen">
+        <div class="screen-top"><i></i><i></i><i></i></div>
+        <div class="screen-icon">ADA</div>
+        <h3>Digital Services</h3><p>One place for your digital work.</p>
+        <div class="screen-line"></div><div class="screen-line short"></div>
       </div>
     </div>
-    <a class="wa-top" href="https://wa.me/917002581794" target="_blank" rel="noopener">WhatsApp</a>
-  </header>
+  </div>
+</section>
 
-  <main class="container">
-    <section class="hero">
-      <span class="eyebrow">DIGITAL SERVICE</span>
-      <h2>Get your work done <span>easily.</span></h2>
-      <p>Choose a service, describe your requirements, upload your file and submit your order.</p>
-    </section>
+<section class="trust-strip"><div class="container trust-items"><span>⚡ Fast Service</span><span>💰 Affordable</span><span>💬 WhatsApp Support</span><span>🔒 Simple Process</span></div></section>
 
-    <form id="orderForm" class="card">
-      <div class="grid">
-        <label>
-          Your Name
-          <input id="customerName" type="text" placeholder="Enter your name" required>
-        </label>
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow">OUR SERVICES</span><h2>Everything Digital, <span>In One Place.</span></h2></div><p>Choose a service and send your requirements. We'll connect with you on WhatsApp.</p></div>
+    <div class="service-grid" id="serviceGrid"></div>
+  </div>
+</section>
 
-        <label>
-          Mobile Number
-          <input id="mobile" type="tel" inputmode="numeric" placeholder="Enter mobile number" required>
-        </label>
+<section class="offer"><div class="container offer-inner"><div><span class="offer-tag">🎉 SPECIAL OFFER</span><h2>Get your digital work done easily.</h2><p>Submit your requirement today and talk directly with us on WhatsApp.</p></div><a href="#order" class="btn light">START AN ORDER →</a></div></section>
 
-        <label class="full">
-          Select Service
-          <select id="service" required>
-            <option value="">Select service</option>
-            <option>Website Design</option>
-            <option>Website Development</option>
-            <option>Logo / Poster Design</option>
-            <option>PDF / Document Work</option>
-            <option>Online Form Filling</option>
-            <option>Typing / Data Entry</option>
-            <option>Digital Marketing</option>
-            <option>Other Digital Service</option>
-          </select>
-        </label>
+<section class="section why" id="why">
+  <div class="container two-col">
+    <div><span class="eyebrow">WHY CHOOSE US</span><h2>Simple service.<br><span>Real support.</span></h2><p>We keep the process straightforward so you can focus on what you need, while we handle the digital work.</p></div>
+    <div class="why-grid">
+      <div class="why-card">⚡<h3>Fast Service</h3><p>Quick response and clear communication.</p></div>
+      <div class="why-card">💬<h3>WhatsApp Support</h3><p>Easy communication from your phone.</p></div>
+      <div class="why-card">💰<h3>Affordable Price</h3><p>Requirement-based pricing with clarity.</p></div>
+      <div class="why-card">✅<h3>Easy Online Order</h3><p>Send your requirements in a few steps.</p></div>
+    </div>
+  </div>
+</section>
 
-        <label class="full">
-          Project Details
-          <textarea id="details" rows="6" placeholder="Describe your requirements, size, pages, style, deadline, etc." required></textarea>
-        </label>
+<section class="section process" id="how">
+  <div class="container"><div class="section-head center"><div><span class="eyebrow">HOW IT WORKS</span><h2>From Order to <span>Done.</span></h2></div></div>
+    <div class="steps">
+      <div class="step"><b>01</b><div>📋</div><h3>Select Service</h3><p>Choose the digital service you need.</p></div>
+      <div class="step"><b>02</b><div>📝</div><h3>Submit Details</h3><p>Tell us what you need through the order form.</p></div>
+      <div class="step"><b>03</b><div>💬</div><h3>WhatsApp Confirmation</h3><p>Discuss requirements, price and delivery.</p></div>
+      <div class="step"><b>04</b><div>🚀</div><h3>Work Completed</h3><p>We work on your request and update you.</p></div>
+    </div>
+  </div>
+</section>
 
-        <label class="full upload-box">
-          <span>Project File</span>
-          <input id="projectFile" type="file"
-                 accept=".jpg,.jpeg,.png,.webp,.pdf,.doc,.docx,.xls,.xlsx,.zip,.rar"
-                 multiple>
-          <small>Upload images, PDF, Word, Excel, ZIP etc. (optional)</small>
-          <div id="fileList" class="file-list">No file selected</div>
-        </label>
-      </div>
-
-      <section class="payment">
-        <div>
-          <p class="payment-title">PAYMENT</p>
-          <h3>Pay via GPay / UPI</h3>
-          <div class="upi-number">7002581794</div>
-          <p>After payment, click Submit Order to send your order details on WhatsApp.</p>
-        </div>
-        <div class="contact-box">
-          <p class="payment-title">WHATSAPP CONTACT</p>
-          <div class="upi-number">7002581794</div>
-          <p>Order details will be sent to this WhatsApp number.</p>
-        </div>
-      </section>
-
-      <button id="submitBtn" type="submit">Submit Order on WhatsApp</button>
-      <p class="hint">Your unique Order ID will be generated automatically.</p>
+<section class="section order-section" id="order">
+  <div class="container order-wrap">
+    <div class="order-info"><span class="eyebrow">PLACE AN ORDER</span><h2>Tell us what<br><span>you need.</span></h2><p>Fill in the basic details. Your order ID will be generated automatically and your request will open in WhatsApp.</p><div class="mini-note">🔐 Your details are used only to process your request.</div></div>
+    <form class="order-form" id="orderForm">
+      <div class="form-title">Order Details</div>
+      <label>Full Name<input id="name" required placeholder="Enter your name"></label>
+      <label>Mobile Number<input id="phone" required inputmode="numeric" placeholder="10-digit mobile number"></label>
+      <label>Service<select id="service" required><option value="">Select a service</option></select></label>
+      <label>Your Requirement<textarea id="requirement" required placeholder="Briefly describe what you need..."></textarea></label>
+      <button class="btn primary full" type="submit">🚀 SUBMIT & OPEN WHATSAPP</button>
+      <p class="form-help">After submitting, WhatsApp will open with your order details.</p>
     </form>
+  </div>
+</section>
 
-    <section id="success" class="success hidden">
-      <h3>Order submitted successfully!</h3>
-      <p>Your Order ID: <strong id="orderId"></strong></p>
-      <p>Status: <strong>Pending</strong></p>
-      <p>WhatsApp has been opened with your order details. Please attach the selected file(s) in WhatsApp and send the message.</p>
-    </section>
+<section class="section track" id="track">
+  <div class="container track-box">
+    <span class="eyebrow">ORDER TRACKING</span><h2>Track your <span>order.</span></h2>
+    <p>Enter an Order ID saved from your order. This demo tracker stores orders on this device.</p>
+    <div class="track-input"><input id="trackId" placeholder="Example: ADA-20260905-4821"><button class="btn primary" id="trackBtn">TRACK</button></div>
+    <div id="trackResult"></div>
+  </div>
+</section>
 
-    <section class="note">
-      <strong>File upload:</strong> The website can select the file, but a normal GitHub Pages website cannot automatically attach a local file to a WhatsApp message. After WhatsApp opens, attach the same file there and send it.
-    </section>
-  </main>
+<section class="section contact" id="contact"><div class="container contact-box"><div><span class="eyebrow">NEED HELP?</span><h2>Let's talk on <span>WhatsApp.</span></h2><p>For custom requirements, pricing or questions, message us directly.</p></div><a class="btn whatsapp" href="https://wa.me/917002581794?text=Hello%20Assam%20Digital%20Assist%2C%20I%20need%20help." target="_blank" rel="noopener">💬 CHAT ON WHATSAPP</a></div></section>
+</main>
 
-  <footer>© 2026 Assam Digital Assist</footer>
-  <script src="script.js"></script>
+<footer id="footer"><div class="container footer-grid"><div><a class="brand" href="#home"><span class="brand-mark">ADA</span><span>ASSAM DIGITAL <b>ASSIST</b></span></a><p>Digital Services Made Simple.</p></div><div><h4>Quick Links</h4><a href="#services">Services</a><a href="#order">Order</a><a href="#track">Track Order</a></div><div><h4>Contact</h4><p>📱 WhatsApp: <a href="https://wa.me/917002581794" target="_blank" rel="noopener">7002581794</a></p><p>Available for digital service enquiries.</p></div></div><div class="container copyright">© 2026 Assam Digital Assist. All rights reserved.</div></footer>
+<a class="float-wa" href="https://wa.me/917002581794?text=Hello%20Assam%20Digital%20Assist%2C%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener" aria-label="WhatsApp">💬 <span>WhatsApp</span></a>
+<script src="script.js"></script>
 </body>
 </html>
