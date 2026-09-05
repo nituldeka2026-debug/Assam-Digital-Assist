@@ -1,61 +1,19 @@
-# Professional Service Platform V1.0
+# Assam Digital Assist - Updated
 
-## Included
-- Customer responsive website
-- Service selection and order creation
-- Automatic Order ID
-- Professional GPay/UPI payment page
-- UTR submission
-- Public order tracking
-- WhatsApp support
-- Admin login
-- Admin dashboard and order search
-- Payment verification/status management
-- PostgreSQL database
-- Render deployment configuration
+## What was fixed
+- Order submit now opens WhatsApp to 7002581794 with the complete order details.
+- Automatic Order ID generation.
+- Project File upload/selection field added.
+- Multiple files can be selected.
+- UTR / Transaction ID field retained.
+- UPI number retained as 7002581794.
+- Works as a static GitHub Pages website; no Node.js server is required for this version.
 
-## 1. Local setup
+## Important
+A normal GitHub Pages website cannot directly attach a user's local file to WhatsApp. The user selects the file on the website, then after WhatsApp opens they must attach the same file in WhatsApp and send it.
 
-Install Node.js 18+.
-
-```bash
-npm install
-```
-
-Create `.env` from `.env.example` and fill in:
-- DATABASE_URL
-- JWT_SECRET
-- ADMIN_USERNAME
-- ADMIN_PASSWORD
-- UPI_ID
-- WHATSAPP_NUMBER
-
-Then:
-
-```bash
-npm start
-```
-
-Open http://localhost:3000
-
-Admin: http://localhost:3000/admin.html
-
-## 2. Render
-
-Create a PostgreSQL database on Render and copy its internal/external connection string into `DATABASE_URL`.
-
-Create a Web Service from this project:
-- Build Command: `npm install`
-- Start Command: `npm start`
-
-Set all secret environment variables in Render.
-
-## Important payment note
-
-`7002581794` is displayed as the GPay contact number, while the actual UPI ID used for the UPI deep-link is configurable through `UPI_ID`.
-
-Do not mark an order as paid just because a customer submitted a UTR. Verify the transaction in the relevant payment/bank system before setting `payment_status=paid`.
-
-## Customisation
-
-Edit the `services` array near the top of `server.js` to change service names, descriptions and prices.
+## GitHub Pages
+Upload these files to the repository root:
+- index.html
+- style.css
+- script.js

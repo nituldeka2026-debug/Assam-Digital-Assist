@@ -1,149 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Assam Digital Assist</title>
-<meta name="description" content="Assam Digital Assist - typing, PDF conversion, image editing, website work, book design and graphic design services.">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assam Digital Assist</title>
+  <meta name="description" content="Assam Digital Assist - Digital services and online assistance.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="hero">
-  <nav class="nav">
-    <div class="brand"><span>ADA</span> Assam Digital Assist</div>
-    <button class="admin-btn" onclick="openAdmin()">Admin</button>
-  </nav>
-  <div class="hero-content">
-    <p class="eyebrow">DIGITAL • DESIGN • DOCUMENT SERVICES</p>
-    <h1>Professional digital services for your <span>next project.</span></h1>
-    <p class="hero-text">Typing, PDF conversion, image editing, website work, book design and graphic design — simple ordering through WhatsApp.</p>
-    <a href="#services" class="primary">Explore Services</a>
-  </div>
-</header>
-
-<main>
-<section id="services" class="section services-section">
-  <div class="section-head">
-    <p class="eyebrow">OUR SERVICES</p>
-    <h2>Choose a service</h2>
-    <p>Choose a service and place your order directly on WhatsApp.</p>
-  </div>
-
-  <div class="cards">
-    <article class="card" onclick="selectService('Assamese / English Typing')">
-      <div class="icon">📝</div>
-      <h3>Assamese / English Typing</h3>
-      <p>Convert handwritten or PDF documents into editable text.</p>
-      <div class="price">Starting from ₹50 / page</div>
-      <button>Order Now</button>
-    </article>
-
-    <article class="card" onclick="selectService('PDF to Word')">
-      <div class="icon">📄</div>
-      <h3>PDF to Word</h3>
-      <p>Convert PDF documents into editable Word files.</p>
-      <div class="price">Starting from ₹30</div>
-      <button>Order Now</button>
-    </article>
-
-    <article class="card" onclick="selectService('Image Editing')">
-      <div class="icon">🖼️</div>
-      <h3>Image Editing</h3>
-      <p>Basic photo editing, resizing and document image work.</p>
-      <div class="price">Starting from ₹100</div>
-      <button>Order Now</button>
-    </article>
-
-    <article class="card" onclick="selectService('Website Work')">
-      <div class="icon">💻</div>
-      <h3>Website Work</h3>
-      <p>Simple website creation, editing and basic maintenance.</p>
-      <div class="price">₹2,000 – ₹3,000</div>
-      <button>Order Now</button>
-    </article>
-
-    <article class="card" onclick="selectService('Book Cover Design')">
-      <div class="icon">📕</div>
-      <h3>Book Cover Design</h3>
-      <p>Attractive and professional cover designs for books and publications.</p>
-      <div class="price">₹1,000 – ₹3,000</div>
-      <button>Order Now</button>
-    </article>
-
-    <article class="card" onclick="selectService('Book Layout')">
-      <div class="icon">📖</div>
-      <h3>Book Layout</h3>
-      <p>Clean and professional interior book layout and page formatting.</p>
-      <div class="price">Depends on book pages</div>
-      <button>Order Now</button>
-    </article>
-
-    <article class="card" onclick="selectService('Graphic Design')">
-      <div class="icon">🎨</div>
-      <h3>Graphic Design</h3>
-      <p>Professional posters, banners, social media designs and other graphics.</p>
-      <div class="price">Depends on design</div>
-      <button>Order Now</button>
-    </article>
-  </div>
-</section>
-
-<section class="track section">
-  <div class="track-box">
-    <div><p class="eyebrow">ORDER TRACKING</p><h2>Check your order status</h2><p>Enter your Order ID to see the latest status.</p></div>
-    <form id="trackForm"><input id="trackId" placeholder="e.g. ADA-20260904-1234" required><button class="primary">Track Order</button></form>
-    <div id="trackResult"></div>
-  </div>
-</section>
-
-<section id="order" class="section order-section">
-  <div class="section-head"><p class="eyebrow">PLACE AN ORDER</p><h2>Tell us what you need</h2><p>Fill in the details below. You can also contact us directly on WhatsApp.</p></div>
-  <form id="orderForm" class="order-form">
-    <div class="grid">
-      <label>Full Name<input id="name" required></label>
-      <label>Mobile Number<input id="mobile" type="tel" required></label>
-      <label>Email (optional)<input id="email" type="email"></label>
-      <label>Service<select id="service" required>
-        <option value="">Select service</option>
-        <option>Assamese / English Typing</option>
-        <option>PDF to Word</option>
-        <option>Image Editing</option>
-        <option>Website Work</option>
-        <option>Book Cover Design</option>
-        <option>Book Layout</option>
-        <option>Graphic Design</option>
-      </select></label>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">ADA</div>
+      <div>
+        <h1>Assam Digital Assist</h1>
+        <p>Fast • Simple • Trusted</p>
+      </div>
     </div>
-    <label>Project Details<textarea id="details" rows="5" placeholder="Describe your requirements, size, pages, style, deadline, etc." required></textarea></label>
-    <div class="payment">
-      <div><p class="eyebrow">PAYMENT</p><h3>Pay via GPay / UPI</h3><p class="gpay">7002581794</p><p>After payment, enter your UTR / Transaction ID below.</p></div>
-      <label>UTR / Transaction ID<input id="utr" required placeholder="Enter transaction reference"></label>
-    </div>
-    <button class="primary big" type="submit">Submit Order</button>
-    <p class="form-note">Your unique Order ID will be generated automatically.</p>
-  </form>
-  <div id="orderResult" class="result"></div>
-</section>
+    <a class="wa-top" href="https://wa.me/917002581794" target="_blank" rel="noopener">WhatsApp</a>
+  </header>
 
-<section class="support">
-  <h2>Need help?</h2><p>Chat with us on WhatsApp about your project.</p>
-  <a class="whatsapp" href="https://wa.me/917002581794" target="_blank" rel="noopener">💬 WhatsApp Support</a>
-</section>
-</main>
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">DIGITAL SERVICE</span>
+      <h2>Get your work done <span>easily.</span></h2>
+      <p>Choose a service, describe your requirements, upload your file and submit your order.</p>
+    </section>
 
-<div id="adminModal" class="modal">
-  <div class="modal-box">
-    <button class="close" onclick="closeAdmin()">×</button>
-    <div id="adminLogin">
-      <p class="eyebrow">ADMIN</p><h2>Admin Login</h2>
-      <input id="adminUser" placeholder="Username"><input id="adminPass" type="password" placeholder="Password">
-      <button class="primary" onclick="adminLogin()">Login</button><p id="adminError"></p>
-    </div>
-    <div id="adminPanel" hidden>
-      <p class="eyebrow">ORDER MANAGEMENT</p><h2>Orders</h2><div id="adminOrders"></div>
-    </div>
-  </div>
-</div>
-<script src="script.js"></script>
+    <form id="orderForm" class="card">
+      <div class="grid">
+        <label>
+          Your Name
+          <input id="customerName" type="text" placeholder="Enter your name" required>
+        </label>
+
+        <label>
+          Mobile Number
+          <input id="mobile" type="tel" inputmode="numeric" placeholder="Enter mobile number" required>
+        </label>
+
+        <label class="full">
+          Select Service
+          <select id="service" required>
+            <option value="">Select service</option>
+            <option>Website Design</option>
+            <option>Website Development</option>
+            <option>Logo / Poster Design</option>
+            <option>PDF / Document Work</option>
+            <option>Online Form Filling</option>
+            <option>Typing / Data Entry</option>
+            <option>Digital Marketing</option>
+            <option>Other Digital Service</option>
+          </select>
+        </label>
+
+        <label class="full">
+          Project Details
+          <textarea id="details" rows="6" placeholder="Describe your requirements, size, pages, style, deadline, etc." required></textarea>
+        </label>
+
+        <label class="full upload-box">
+          <span>Project File</span>
+          <input id="projectFile" type="file"
+                 accept=".jpg,.jpeg,.png,.webp,.pdf,.doc,.docx,.xls,.xlsx,.zip,.rar"
+                 multiple>
+          <small>Upload images, PDF, Word, Excel, ZIP etc. (optional)</small>
+          <div id="fileList" class="file-list">No file selected</div>
+        </label>
+      </div>
+
+      <section class="payment">
+        <div>
+          <p class="payment-title">PAYMENT</p>
+          <h3>Pay via GPay / UPI</h3>
+          <div class="upi-number">7002581794</div>
+          <p>After payment, enter your UTR / Transaction ID below.</p>
+        </div>
+        <label>
+          UTR / Transaction ID
+          <input id="utr" type="text" placeholder="Enter transaction reference" required>
+        </label>
+      </section>
+
+      <button id="submitBtn" type="submit">Submit Order on WhatsApp</button>
+      <p class="hint">Your unique Order ID will be generated automatically.</p>
+    </form>
+
+    <section id="success" class="success hidden">
+      <h3>Order submitted successfully!</h3>
+      <p>Your Order ID: <strong id="orderId"></strong></p>
+      <p>Status: <strong>Pending</strong></p>
+      <p>WhatsApp has been opened with your order details. Please attach the selected file(s) in WhatsApp and send the message.</p>
+    </section>
+
+    <section class="note">
+      <strong>File upload:</strong> The website can select the file, but a normal GitHub Pages website cannot automatically attach a local file to a WhatsApp message. After WhatsApp opens, attach the same file there and send it.
+    </section>
+  </main>
+
+  <footer>© 2026 Assam Digital Assist</footer>
+  <script src="script.js"></script>
 </body>
 </html>
