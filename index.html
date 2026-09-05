@@ -4,141 +4,92 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Assam Digital Assist</title>
-<meta name="description" content="Assam Digital Assist - Online digital services with easy WhatsApp ordering and UPI payment.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <div class="logo">🟢 Assam Digital Assist</div>
-  <nav>
-    <a href="#home">Home</a><a href="#services">Services</a><a href="#order">Order</a><a href="#payment">Payment</a>
+<header class="hero">
+  <nav class="nav">
+    <div class="brand"><span>ADA</span> Assam Digital Assist</div>
+    <button class="admin-btn" onclick="openAdmin()">Admin</button>
   </nav>
+  <div class="hero-content">
+    <p class="eyebrow">DIGITAL • DESIGN • DOCUMENT SERVICES</p>
+    <h1>Professional services for your <span>next project.</span></h1>
+    <p class="hero-text">Book cover design, book layout, graphic design and digital assistance — simple ordering, secure payment reference and easy tracking.</p>
+    <a href="#services" class="primary">Explore Services</a>
+  </div>
 </header>
 
-<section id="home" class="hero">
-  <div class="hero-content">
-    <h1>Assam Digital Assist</h1>
-    <p>Simple, Fast & Affordable Digital Services</p>
-    <p class="hero-small">Order easily through WhatsApp and pay using UPI.</p>
-    <a href="#services" class="main-btn">Explore Services</a>
+<main>
+<section id="services" class="section">
+  <div class="section-head">
+    <p class="eyebrow">OUR SERVICES</p>
+    <h2>Choose a service</h2>
+    <p>Select a service, submit your requirements and place your order.</p>
+  </div>
+  <div class="cards">
+    <article class="card" onclick="selectService('Book Cover Design')">
+      <div class="icon">📕</div><h3>Book Cover Design</h3><p>Professional front, back and spine cover design for books and publications.</p><button>Order now →</button>
+    </article>
+    <article class="card" onclick="selectService('Book Layout')">
+      <div class="icon">📖</div><h3>Book Layout</h3><p>Clean interior formatting, page layout, typography and print-ready preparation.</p><button>Order now →</button>
+    </article>
+    <article class="card" onclick="selectService('Graphic Design')">
+      <div class="icon">🎨</div><h3>Graphic Design</h3><p>Posters, flyers, social media creatives, banners and other custom graphics.</p><button>Order now →</button>
+    </article>
+    <article class="card" onclick="selectService('Digital Assistance')">
+      <div class="icon">💻</div><h3>Digital Assistance</h3><p>General digital, document and online assistance according to your requirements.</p><button>Order now →</button>
+    </article>
   </div>
 </section>
 
-<section id="services" class="section">
-  <h2>Our Services</h2>
-  <p class="section-subtitle">Choose a service and place your order directly on WhatsApp.</p>
-  <div class="service-grid">
-
-    <div class="service-card">
-      <div class="service-icon">📝</div>
-      <h3>Assamese / English Typing</h3>
-      <p>Convert handwritten or PDF documents into editable text.</p>
-      <div class="price">Starting from ₹50 / page</div>
-      <button class="order-btn" onclick="selectService('Assamese / English Typing')">Order Now</button>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">📄</div>
-      <h3>PDF to Word</h3>
-      <p>Convert PDF documents into editable Word files.</p>
-      <div class="price">Starting from ₹30</div>
-      <button class="order-btn" onclick="selectService('PDF to Word')">Order Now</button>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">🖼️</div>
-      <h3>Image Editing</h3>
-      <p>Basic photo editing, resizing and document image work.</p>
-      <div class="price">Starting from ₹100</div>
-      <button class="order-btn" onclick="selectService('Image Editing')">Order Now</button>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">💻</div>
-      <h3>Website Work</h3>
-      <p>Simple website creation, editing and basic maintenance.</p>
-      <div class="price">₹2,000 – ₹3,000</div>
-      <button class="order-btn" onclick="selectService('Website Work')">Order Now</button>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">📕</div>
-      <h3>Book Cover Design</h3>
-      <p>Attractive and professional cover designs for books and publications.</p>
-      <div class="price">₹1,000 – ₹3,000</div>
-      <button class="order-btn" onclick="selectService('Book Cover Design')">Order Now</button>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">📖</div>
-      <h3>Book Layout</h3>
-      <p>Clean and professional interior book layout and page formatting.</p>
-      <div class="price">Depends on book pages</div>
-      <button class="order-btn" onclick="selectService('Book Layout')">Order Now</button>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">🎨</div>
-      <h3>Graphic Design</h3>
-      <p>Professional posters, banners, social media designs and other graphics.</p>
-      <div class="price">Depends on design</div>
-      <button class="order-btn" onclick="selectService('Graphic Design')">Order Now</button>
-    </div>
-
+<section class="track section">
+  <div class="track-box">
+    <div><p class="eyebrow">ORDER TRACKING</p><h2>Check your order status</h2><p>Enter your Order ID to see the latest status.</p></div>
+    <form id="trackForm"><input id="trackId" placeholder="e.g. ADA-20260904-1234" required><button class="primary">Track Order</button></form>
+    <div id="trackResult"></div>
   </div>
 </section>
 
 <section id="order" class="section order-section">
-  <h2>Place Your Order</h2>
-  <p class="section-subtitle">Fill the form and send your order directly to WhatsApp.</p>
-  <div class="order-box">
-    <label>Your Name</label>
-    <input type="text" id="customerName" placeholder="Enter your name">
-
-    <label>WhatsApp Number</label>
-    <input type="tel" id="customerPhone" placeholder="Enter your WhatsApp number">
-
-    <label>Select Service</label>
-    <select id="serviceName">
-      <option value="">Select a service</option>
-      <option>Assamese / English Typing</option>
-      <option>PDF to Word</option>
-      <option>Image Editing</option>
-      <option>Website Work</option>
-      <option>Book Cover Design</option>
-      <option>Book Layout</option>
-      <option>Graphic Design</option>
-    </select>
-
-    <label>Order Details</label>
-    <textarea id="orderDetails" rows="5" placeholder="Describe what you need..."></textarea>
-
-    <label>Quantity</label>
-    <input type="text" id="quantity" placeholder="Example: 5 pages">
-
-    <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">📱 Order on WhatsApp</button>
-  </div>
+  <div class="section-head"><p class="eyebrow">PLACE AN ORDER</p><h2>Tell us what you need</h2></div>
+  <form id="orderForm" class="order-form">
+    <div class="grid">
+      <label>Full Name<input id="name" required></label>
+      <label>Mobile Number<input id="mobile" type="tel" required></label>
+      <label>Email (optional)<input id="email" type="email"></label>
+      <label>Service<select id="service" required><option value="">Select service</option><option>Book Cover Design</option><option>Book Layout</option><option>Graphic Design</option><option>Digital Assistance</option></select></label>
+    </div>
+    <label>Project Details<textarea id="details" rows="5" placeholder="Describe your requirements, size, pages, style, deadline, etc." required></textarea></label>
+    <div class="payment">
+      <div><p class="eyebrow">PAYMENT</p><h3>Pay via GPay</h3><p class="gpay">7002581794</p><p>After payment, enter your UTR / Transaction ID below.</p></div>
+      <label>UTR / Transaction ID<input id="utr" required placeholder="Enter transaction reference"></label>
+    </div>
+    <button class="primary big" type="submit">Submit Order</button>
+    <p class="form-note">Your unique Order ID will be generated automatically.</p>
+  </form>
+  <div id="orderResult" class="result"></div>
 </section>
 
-<section id="payment" class="section payment-section">
-  <h2>UPI Payment</h2>
-  <p class="section-subtitle">After confirming your order, you can pay using UPI.</p>
-  <div class="payment-box">
-    <div class="upi-icon">💳</div>
-    <h3>Pay Securely Using UPI</h3>
-    <p class="payment-note">Please confirm the final amount with us before making payment.</p>
-    <div class="upi-id">UPI Number: <strong id="upiDisplay">7002581794</strong></div>
-    <button class="pay-btn" onclick="sendPaymentWhatsApp()">💰 Pay Now</button>
-    <button class="screenshot-btn" onclick="sendPaymentWhatsApp()">📸 Send Payment Screenshot</button>
-  </div>
+<section class="support">
+  <h2>Need help?</h2><p>Chat with us on WhatsApp about your project.</p>
+  <a class="whatsapp" href="https://wa.me/917002581794" target="_blank">💬 WhatsApp Support</a>
 </section>
+</main>
 
-<footer>
-  <h3>Assam Digital Assist</h3>
-  <p>Simple digital services for everyone.</p>
-  <p class="copyright">© 2026 Assam Digital Assist. All Rights Reserved.</p>
-</footer>
-
+<div id="adminModal" class="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closeAdmin()">×</button>
+    <div id="adminLogin">
+      <p class="eyebrow">ADMIN</p><h2>Admin Login</h2>
+      <input id="adminUser" placeholder="Username"><input id="adminPass" type="password" placeholder="Password">
+      <button class="primary" onclick="adminLogin()">Login</button><p id="adminError"></p>
+    </div>
+    <div id="adminPanel" hidden>
+      <p class="eyebrow">ORDER MANAGEMENT</p><h2>Orders</h2><div id="adminOrders"></div>
+    </div>
+  </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
