@@ -1,29 +1,22 @@
-# Assam Digital Assist — New Frontend
+ASSAM DIGITAL ASSIST
+====================
 
-This ZIP contains ONLY the replacement frontend files:
+Updated service section:
+1. Assamese / English Typing - Starting from ₹50 / page
+2. PDF to Word - Starting from ₹30
+3. Image Editing - Starting from ₹100
+4. Website Work - ₹2,000 – ₹3,000
+5. Book Cover Design - ₹1,000 – ₹3,000
+6. Book Layout - Depends on book pages
+7. Graphic Design - Depends on design
+
+UPI / GPay number: 7002581794
+WhatsApp: +91 7002581794
+
+Files:
 - index.html
 - style.css
 - script.js
 
-Services added:
-- Book Cover Design
-- Book Layout
-- Graphic Design
-- Digital Assistance
-- GPay reference: 7002581794
-- UTR/Transaction ID
-- Customer order tracking
-- Admin login/order status UI
-- WhatsApp support
-- Mobile responsive design
-
-IMPORTANT:
-Do not replace server.js, package.json, render.yaml, public/, orders.json or .env files from this ZIP.
-The frontend expects the existing backend API routes:
-POST /api/orders
-GET /api/orders/:orderId
-POST /api/admin/login
-GET /api/admin/orders
-PATCH /api/admin/orders/:orderId
-
-If your existing server.js uses different route names, keep server.js unchanged and adjust only script.js API paths.
+Upload all files to the root of your GitHub Pages repository.
+Keep your existing server.js/backend separately if you use one.
