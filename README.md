@@ -17,3 +17,6 @@ Upload these files to the repository root:
 - index.html
 - style.css
 - script.js
+
+
+Latest update: UTR / Transaction ID removed. WhatsApp contact is 7002581794.

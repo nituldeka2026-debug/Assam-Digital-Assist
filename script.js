@@ -26,10 +26,9 @@ form.addEventListener("submit", (event) => {
   const mobile = document.getElementById("mobile").value.trim();
   const service = document.getElementById("service").value;
   const details = document.getElementById("details").value.trim();
-  const utr = document.getElementById("utr").value.trim();
   const files = [...fileInput.files];
 
-  if (!name || !mobile || !service || !details || !utr) {
+  if (!name || !mobile || !service || !details) {
     alert("Please fill all required fields.");
     return;
   }
@@ -57,8 +56,7 @@ Service: ${service}
 Project Details:
 ${details}
 
-UTR / Transaction ID: ${utr}
-UPI Number: ${UPI_NUMBER}
+UPI / WhatsApp Contact: ${UPI_NUMBER}
 
 Selected File(s):
 ${fileText}
